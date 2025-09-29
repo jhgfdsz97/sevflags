@@ -1,3 +1,4 @@
+--!optimize 2
 local fflags = loadstring(game:HttpGet("https://raw.githubusercontent.com/jhgfdsz97/sevflags/refs/heads/main/flahs.lua"))()
 
 local readfuncs = {
