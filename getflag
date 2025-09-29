@@ -1,0 +1,35 @@
+local fflags = loadstring(game:HttpGet("https://raw.githubusercontent.com/jhgfdsz97/sevflags/refs/heads/main/flahs.lua"))()
+
+local readfuncs = {
+    qword  = memory.readu64,
+    dword  = memory.readu32,
+    word   = memory.readu16,
+    byte   = memory.readu8,
+    bool   = memory.readbool,
+    float  = memory.readf32,
+    double = memory.readf64,
+    string = memory.readstring,
+}
+
+function getfflag(name, forcetype, tryall)
+    local entry = fflags[name]
+    if not entry then return nil end
+    local addr = memory.base + entry.address
+    if tryall == 1 or tryall == true then
+        local results = {}
+        for t, fn in pairs(readfuncs) do
+            local ok, val = pcall(fn, addr)
+            results[t] = ok and val or nil
+        end
+        return results
+    else
+        local t = forcetype or entry.type
+        local fn = readfuncs[t]
+        if not fn then return nil end
+        local ok, val = pcall(fn, addr)
+        if ok then
+            return val
+        end
+        return nil
+    end
+end
