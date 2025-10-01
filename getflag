@@ -35,7 +35,6 @@ function getfflag(name, forcetype, tryall)
     end
 end
 
--- Returns the absolute address of the specified FFlag, or nil if not found
 function getaddress(name)
     local entry = fflags[name]
     if not entry then return nil end
