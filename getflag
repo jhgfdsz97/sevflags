@@ -38,5 +38,5 @@ end
 function getaddress(name)
     local entry = fflags[name]
     if not entry then return nil end
-    return memory.base + entry.address
+    return entry.address
 end
