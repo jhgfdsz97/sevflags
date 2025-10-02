@@ -39,7 +39,5 @@ function getaddress(name)
     local entry = fflags[name]
     if not entry then return nil end
     local hex = string.format("0x%X", entry.address)
-    print("Debug - hex variable:", hex)
-    print("Debug - type:", type(hex))
     return hex
 end
